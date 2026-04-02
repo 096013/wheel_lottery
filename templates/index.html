@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>轉盤抽獎系統</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🎡 轉盤抽獎系統</h1>
+
+        <div class="layout">
+            <div class="left-panel">
+                <div class="card">
+                    <h2>獎品列表</h2>
+                    <textarea id="prizesInput" rows="8">{{ prizes | join('\n') }}</textarea>
+                </div>
+
+                <div class="card">
+                    <h2>抽獎者列表</h2>
+                    <textarea id="playersInput" rows="8">{{ players | join('\n') }}</textarea>
+                </div>
+
+                <div class="button-group">
+                    <button id="updateBtn">更新名單</button>
+                    <button id="spinBtn">開始抽獎</button>
+                    <button id="resetBtn" class="secondary-btn">清除得獎紀錄</button>
+                </div>
+
+                <div class="result-box">
+                    <h3>本次抽獎結果</h3>
+                    <p id="resultPrize">獎品：尚未抽獎</p>
+                    <p id="resultPlayer">得獎者：尚未抽獎</p>
+                </div>
+            </div>
+
+            <div class="right-panel">
+                <div class="wheel-wrapper">
+                    <div class="pointer">▼</div>
+                    <canvas id="wheelCanvas" width="500" height="500"></canvas>
+                </div>
+
+                <div class="history-box">
+                    <h2>得獎紀錄</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>序號</th>
+                                <th>獎品</th>
+                                <th>得獎者</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const initialPrizes = {{ prizes | tojson }};
+        const initialPlayers = {{ players | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

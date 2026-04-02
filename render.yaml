@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: lottery-wheel-app  # 你可以自訂網站顯示名稱
+    runtime: python
+    plan: free              # 使用免費方案
+    region: oregon          # 選擇伺服器地區（俄勒岡通常較穩定）
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.12      # 建議指定一個穩定的 Python 版本
+      - key: FLASK_ENV
+        value: production   # 確保在生產模式下執行
